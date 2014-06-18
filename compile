@@ -1,0 +1,5 @@
+#! /bin/bash
+
+coffee --compile --join compiled/hebrewDate.js src/*.coffee
+coffee --compile --join qunit/tests.js qunit/*.coffee
+haml qunit/qunit.haml qunit/qunit.html
