@@ -16,11 +16,14 @@ class Molad
   getHalakim: -> @halakim
   getHours: -> @hours
   getDay: -> @day
+  advance: (months) -> new Molad(@totalHalakim + months * Molad.LUNAR_CYCLE)
 
 (->
   @HALAKIM_PER_HOUR = 1080
   @HALAKIM_PER_DAY = @HALAKIM_PER_HOUR * 24
   @HALAKIM_PER_WEEK = @HALAKIM_PER_DAY * 7
+
+  @LUNAR_CYCLE = 29 * @HALAKIM_PER_DAY + 12 * @HALAKIM_PER_HOUR + 793
 ).call(Molad)
 
 (exports ? this).Molad = Molad
