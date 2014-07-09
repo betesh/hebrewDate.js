@@ -6,6 +6,8 @@
 ###
 
 positive_modulus = (a,b) -> ((a % b) + b) % b
+leapMonthsElapsedInCurrent19YearCycle = (n) -> Math.floor(3*n/8) - Math.floor(n/16) + Math.floor(n/17)
+leapMonthsInHistory = (n) -> Math.floor((n - 1)/ 19) * 7 + leapMonthsElapsedInCurrent19YearCycle((n - 1) % 19)
 
 class Molad
   constructor: (totalHalakim) ->
@@ -24,6 +26,11 @@ class Molad
   @HALAKIM_PER_WEEK = @HALAKIM_PER_DAY * 7
 
   @LUNAR_CYCLE = 29 * @HALAKIM_PER_DAY + 12 * @HALAKIM_PER_HOUR + 793
+
+  @EPOCH = { molad: new Molad(-10 * @HALAKIM_PER_HOUR), year: 2 }
+  @leapMonthsSinceEpoch = (hebrewYear) -> leapMonthsInHistory(hebrewYear) - leapMonthsInHistory(@EPOCH.year)
+  @monthSinceEpoch = (hebrewYear) -> (hebrewYear - @EPOCH.year) * 12 + @leapMonthsSinceEpoch(hebrewYear)
+  @ofRoshHashanah = @ofRoshHaShanah = @ofRoshHashana = @ofRoshHaShana = (hebrewYear) -> @EPOCH.molad.advance(@monthSinceEpoch(hebrewYear))
 ).call(Molad)
 
 (exports ? this).Molad = Molad
