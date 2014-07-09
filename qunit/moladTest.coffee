@@ -4,6 +4,7 @@ assertMolad = (description, arg, halakim, hours, day) ->
     assert.deepEqual molad.getHalakim(), halakim
     assert.deepEqual molad.getHours(), hours
     assert.deepEqual molad.getDay(), day
+    assert.deepEqual molad.getHalakimIntoDay(), (hours * 1080 + halakim)
 
 assertMolad("Molad Friday night 1 helek", 1, 1, 0, 6)
 assertMolad("Molad Friday night 1079 halakim", 1079, 1079, 0, 6)

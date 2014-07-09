@@ -15,9 +15,11 @@ class Molad
     @halakim = @totalHalakim % Molad.HALAKIM_PER_HOUR
     @hours = Math.floor(@totalHalakim / Molad.HALAKIM_PER_HOUR) % 24
     @day = positive_modulus(Math.floor(totalHalakim / Molad.HALAKIM_PER_DAY) + 6, 7)
+    @halakimIntoDay = @totalHalakim % Molad.HALAKIM_PER_DAY
   getHalakim: -> @halakim
   getHours: -> @hours
   getDay: -> @day
+  getHalakimIntoDay: -> @halakimIntoDay
   advance: (months) -> new Molad(@totalHalakim + months * Molad.LUNAR_CYCLE)
 
 (->
