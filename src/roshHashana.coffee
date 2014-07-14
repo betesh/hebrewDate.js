@@ -2,6 +2,7 @@ increment_date = (date, length) -> date.setDate(date.getDate() + length)
 
 class RoshHashana
   constructor: (hebrewYear) ->
+    @hebrewYear = hebrewYear
     @molad = Molad.ofRoshHashanah(hebrewYear)
     @gregorianDateOfMolad = new Date(Molad.EPOCH.gregorianDate)
     @gregorianDateOfMolad.setDate(Molad.EPOCH.gregorianDate.getDate() + Molad.daysSinceEpoch(hebrewYear))
@@ -25,6 +26,7 @@ class RoshHashana
   getMolad: -> @molad
   getGregorianDateOfMolad: -> @gregorianDateOfMolad
   getGregorianDate: -> @gregorianDate
+  getHebrewYear: -> @hebrewYear
 
 (->
   @GUCHADZAT = [3,6,8,11,14,17,19]

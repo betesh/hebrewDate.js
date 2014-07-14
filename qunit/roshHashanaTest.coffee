@@ -5,6 +5,7 @@ assertRoshHashana = (hebrewYear, molad, dateOfMolad, dateOfRoshHashana, dehiyot)
     assert.deepEqual actual.getGregorianDateOfMolad(), dateOfMolad
     assert.deepEqual actual.getGregorianDate(), dateOfRoshHashana
     assert.deepEqual actual.dehiyot, dehiyot
+    assert.deepEqual actual.getHebrewYear(), hebrewYear
 
 assertRoshHashana(5773, new Molad(1 * Molad.HALAKIM_PER_DAY + 7 * Molad.HALAKIM_PER_HOUR + 57*18 + 8), new Date(2012,8,16), new Date(2012,8,17), ['ADU'])
 assertRoshHashana(5774, new Molad(5 * Molad.HALAKIM_PER_DAY + 16 * Molad.HALAKIM_PER_HOUR + 46 * 18 + 2), new Date(2013,8,5), new Date(2013,8,5), [])
