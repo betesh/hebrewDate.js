@@ -1,4 +1,20 @@
 class HebrewMonth
+  constructor: (hebrewYear, hebrewMonthIndex) ->
+    @hebrewYear = hebrewYear
+    @monthsOfYear = HebrewMonth.MONTHS.ofYear(hebrewYear)
+    @hebrewMonth = @monthsOfYear[hebrewMonthIndex]
+    @length = @hebrewMonth.length(hebrewYear)
+    @gregorianDateOfThisRoshHodesh = new Date(hebrewYear.getThisRoshHashana().getGregorianDate())
+    i = 0
+    while i < hebrewMonthIndex
+      HebrewDate.HELPERS.incrementDate(@gregorianDateOfThisRoshHodesh, @monthsOfYear[i].length(hebrewYear))
+      ++i
+    @gregorianDateOfNextRoshHodesh = new Date(@gregorianDateOfThisRoshHodesh)
+    HebrewDate.HELPERS.incrementDate(@gregorianDateOfNextRoshHodesh, @length)
+  getLength: -> @length
+  getName: -> @hebrewMonth.name
+  getThisRoshHodesh: -> @gregorianDateOfThisRoshHodesh
+  getNextRoshHodesh: -> @gregorianDateOfNextRoshHodesh
 
 (->
   @TISHRI = @TISHREI = { name: "תִּשׁרִי", length: (year) -> 30 }
@@ -18,6 +34,7 @@ class HebrewMonth
   @MONTHS = { PESHUTA: [@TISHRI, @HESHVAN, @KISLEV, @TEVET, @SHEVAT, @ADAR, @NISAN, @IYAR, @SIVAN, @TAMUZ, @AB, @ELUL] }
   @MONTHS.MEUBERET = @MONTHS.PESHUTA.slice(0)
   @MONTHS.MEUBERET.splice(@MONTHS.PESHUTA.indexOf(@ADAR), 1, @ADAR_RISHON, @ADAR_SHENI)
+  @MONTHS.ofYear = (hebrewYear) -> if hebrewYear.isLeapYear() then @MEUBERET else @PESHUTA
   @NAMES = (month.name for month in @MONTHS.PESHUTA)
 ).call(HebrewMonth)
 

@@ -46,6 +46,17 @@ assertMonthLengths = ->
     assert.deepEqual HebrewMonth.ADAR_RISHON.length(haser_peshutah), null
     assert.deepEqual HebrewMonth.ADAR_SHENI.length(haser_peshutah), null
 
+assertHebrewMonth = (year, month, length, name, gregorianDateOfThisRoshHodesh, gregorianDateOfNextRoshHodesh) ->
+  QUnit.test "Month #{month} of year #{year}", (assert) ->
+    actual = new HebrewMonth(hebrew_year_of(year), month)
+    assert.deepEqual actual.getLength(), length
+    assert.deepEqual actual.getName(), name
+    assert.deepEqual actual.getThisRoshHodesh(), gregorianDateOfThisRoshHodesh
+    assert.deepEqual actual.getNextRoshHodesh(), gregorianDateOfNextRoshHodesh
+
 assertMonthNames()
 assertMonthsArray()
 assertMonthLengths()
+
+assertHebrewMonth(5773, 0, 30, "תִּשׁרִי", new Date(2012,8,17), new Date(2012,9,17))
+assertHebrewMonth(5773, 1, 29, "מַרְחֶשְׁוָן", new Date(2012,9,17), new Date(2012,10,15))
