@@ -1,5 +1,3 @@
-increment_date = (date, length) -> date.setDate(date.getDate() + length)
-
 class RoshHashana
   constructor: (hebrewYear) ->
     @molad = Molad.ofRoshHashanah(hebrewYear)
@@ -21,7 +19,7 @@ class RoshHashana
       else if 1 == dayOfWeek && halakim > RoshHashana.TUTAKPAT && @followsLeapYear
         @dehiyot.push('BETUTAKPAT')
       @dehiyot.push('ADU') if 1 == @dehiyot.length && ((dayOfWeek + 1) % 7) in RoshHashana.ADU
-    increment_date(@gregorianDate, @dehiyot.length)
+    HebrewDate.HELPERS.incrementDate(@gregorianDate, @dehiyot.length)
   getMolad: -> @molad
   getGregorianDateOfMolad: -> @gregorianDateOfMolad
   getGregorianDate: -> @gregorianDate
