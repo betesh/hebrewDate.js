@@ -16,6 +16,7 @@ class HebrewDate
   getYearFromCreation: -> @hebrewYear.getYearFromCreation()
   getDayOfYear: -> @dayOfYear
   getDayOfMonth: -> @dayOfMonth
+  isPurim: -> @staticHebrewMonth in [HebrewMonth.ADAR, HebrewMonth.ADAR_SHENI] && 14 == @dayOfMonth
 
 (->
   @HELPERS = {
