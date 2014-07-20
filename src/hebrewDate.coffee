@@ -1,4 +1,21 @@
 class HebrewDate
+  constructor: (date) ->
+    @hebrewYear = new HebrewYear(date)
+    @dayOfYear = parseInt(HebrewDate.HELPERS.durationInGregorianDays(date, @hebrewYear.getThisRoshHashana().getGregorianDate()) + 1)
+    dayOfMonth = @dayOfYear
+    months = HebrewMonth.MONTHS.ofYear(@hebrewYear)
+    month = 0
+    while dayOfMonth > (length = months[month].length(@hebrewYear))
+      dayOfMonth -= length
+      ++month
+    @hebrewMonth = new HebrewMonth(@hebrewYear, month)
+    @staticHebrewMonth = months[month]
+    @dayOfMonth = dayOfMonth
+  getHebrewYear: -> @hebrewYear
+  getHebrewMonth: -> @hebrewMonth
+  getYearFromCreation: -> @hebrewYear.getYearFromCreation()
+  getDayOfYear: -> @dayOfYear
+  getDayOfMonth: -> @dayOfMonth
 
 (->
   @HELPERS = {
