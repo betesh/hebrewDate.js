@@ -1,5 +1,3 @@
-duration_in_days = (end_date, begin_date) -> (end_date.getGregorianDate() - begin_date.getGregorianDate()) / 1000 / 60 / 60 / 24
-
 class HebrewYear
   constructor: (gregorianDate) ->
     gregorianYear = gregorianDate.getFullYear()
@@ -11,7 +9,7 @@ class HebrewYear
       @thisRoshHashana = new RoshHashana(@yearFromCreation)
     else
       @nextRoshHashana = new RoshHashana(@yearFromCreation + 1)
-    @daysInYear = duration_in_days(@nextRoshHashana, @thisRoshHashana)
+    @daysInYear = HebrewDate.HELPERS.durationInHebrewDays(@nextRoshHashana, @thisRoshHashana)
   getDaysInYear: -> @daysInYear
   getMonthsInYear: -> if @isLeapYear() then 13 else 12
   getThisRoshHashana: -> @thisRoshHashana
