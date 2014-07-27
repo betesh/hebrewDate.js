@@ -26,6 +26,15 @@ edgeTestOneDayChag = (name, date, otherOccasions = {}) ->
   assertIsChag(name, date, otherOccasions.date)
   assertNotChag(name, after, otherOccasions.after)
 
+edgeTestMultiDayChag = (name, date, length, otherOccasions = {}) ->
+  before = new Date(date)
+  before.setDate(before.getDate() - 1)
+  assertNotChag(name, before, otherOccasions.before)
+  for i in [1..length]
+    assertIsChag(name, new Date(date), otherOccasions["#{i}"])
+    date.setDate(date.getDate() + 1)
+  assertNotChag(name, date, otherOccasions.after)
+
 shabbatTest = ->
   edgeTestOneDayChag('Shabbat', new Date(2014,6,19))
   edgeTestOneDayChag('Shabbat', new Date(2014,6,26))
@@ -35,8 +44,13 @@ purimTest = ->
   assertNotChag('Purim', new Date(2014,1,14))
   edgeTestOneDayChag('Purim', new Date(2013,1,24), before: ['Shabbat'])
 
+moedTest = ->
+  edgeTestMultiDayChag('Moed', new Date(2014,3,17),4,'3': ['Shabbat'])
+  edgeTestMultiDayChag('Moed', new Date(2014,9,11),5,'1': ['Shabbat'])
+
 assetHebrewDate(new Date(2014,6,20), 5774, HebrewMonth.TAMUZ, 22, 319)
 assetHebrewDate(new Date(2014,4,12), 5774, HebrewMonth.IYAR, 12, 250)
 
 shabbatTest()
 purimTest()
+moedTest()

@@ -19,7 +19,10 @@ class HebrewDate
   getDayOfMonth: -> @dayOfMonth
   isShabbat: -> 6 == @gregorianDate.getDay()
   isPurim: -> @staticHebrewMonth in [HebrewMonth.ADAR, HebrewMonth.ADAR_SHENI] && 14 == @dayOfMonth
-  occasions: -> result = []; ((result.push(chag.replace(/^is/, '')) if chag.match(/^is/) && @[chag]()) for chag, val of @); result
+  inTishri: -> @staticHebrewMonth is HebrewMonth.TISHRI
+  inNisan: -> @staticHebrewMonth is HebrewMonth.NISAN
+  isMoed: -> (@inNisan() && @dayOfMonth in [17..20]) || (@inTishri() && @dayOfMonth in [17..21])
+  occasions: -> result = []; (result.push(chag.replace(/^is/, '')) if chag.match(/^is/) && @[chag]()) for chag, val of @; result
 
 (->
   @HELPERS = {
