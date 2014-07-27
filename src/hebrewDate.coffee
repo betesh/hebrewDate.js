@@ -19,6 +19,7 @@ class HebrewDate
   getDayOfMonth: -> @dayOfMonth
   isShabbat: -> 6 == @gregorianDate.getDay()
   isPurim: -> @staticHebrewMonth in [HebrewMonth.ADAR, HebrewMonth.ADAR_SHENI] && 14 == @dayOfMonth
+  occasions: -> result = []; ((result.push(chag.replace(/^is/, '')) if chag.match(/^is/) && @[chag]()) for chag, val of @); result
 
 (->
   @HELPERS = {

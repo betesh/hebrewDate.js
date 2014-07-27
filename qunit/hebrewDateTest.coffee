@@ -6,31 +6,34 @@ assetHebrewDate = (date, hebrewYear, hebrewMonth, dayOfMonth, dayOfYear) ->
     assert.deepEqual actual.getDayOfMonth(), dayOfMonth
     assert.deepEqual actual.getDayOfYear(), dayOfYear
 
-assertChag = (name, date, _is) ->
+assertChag = (name, date, otherOccasions = [], _is) ->
   QUnit.test "#{date} is #{if _is then '' else 'not'} #{name}", (assert) ->
-    result = new HebrewDate(date)["is#{name}"]()
+    target = new HebrewDate(date)
+    result = target["is#{name}"]()
     assert.ok(if _is then result else !result)
+    otherOccasions.push(name) if _is
+    assert.deepEqual target.occasions(), otherOccasions
 
-assertIsChag = (name, date) -> assertChag(name, date, true)
-assertNotChag = (name, date) -> assertChag(name, date, false)
+assertIsChag = (name, date, otherOccasions) -> assertChag(name, date, otherOccasions, true)
+assertNotChag = (name, date, otherOccasions) -> assertChag(name, date, otherOccasions, false)
 
-edgeTestOneDayChag = (name, date) ->
+edgeTestOneDayChag = (name, date, otherOccasions = {}) ->
   before = new Date(date)
   before.setDate(before.getDate() - 1)
   after = new Date(date)
   after.setDate(after.getDate() + 1)
-  assertNotChag(name, before)
-  assertIsChag(name, date)
-  assertNotChag(name, after)
+  assertNotChag(name, before, otherOccasions.before)
+  assertIsChag(name, date, otherOccasions.date)
+  assertNotChag(name, after, otherOccasions.after)
 
 shabbatTest = ->
   edgeTestOneDayChag('Shabbat', new Date(2014,6,19))
   edgeTestOneDayChag('Shabbat', new Date(2014,6,26))
 
 purimTest = ->
-  edgeTestOneDayChag('Purim', new Date(2014,2,16))
+  edgeTestOneDayChag('Purim', new Date(2014,2,16), before: ['Shabbat'])
   assertNotChag('Purim', new Date(2014,1,14))
-  edgeTestOneDayChag('Purim', new Date(2013,1,24))
+  edgeTestOneDayChag('Purim', new Date(2013,1,24), before: ['Shabbat'])
 
 assetHebrewDate(new Date(2014,6,20), 5774, HebrewMonth.TAMUZ, 22, 319)
 assetHebrewDate(new Date(2014,4,12), 5774, HebrewMonth.IYAR, 12, 250)
