@@ -23,6 +23,10 @@ edgeTestOneDayChag = (name, date) ->
   assertIsChag(name, date)
   assertNotChag(name, after)
 
+shabbatTest = ->
+  edgeTestOneDayChag('Shabbat', new Date(2014,6,19))
+  edgeTestOneDayChag('Shabbat', new Date(2014,6,26))
+
 purimTest = ->
   edgeTestOneDayChag('Purim', new Date(2014,2,16))
   assertNotChag('Purim', new Date(2014,1,14))
@@ -31,4 +35,5 @@ purimTest = ->
 assetHebrewDate(new Date(2014,6,20), 5774, HebrewMonth.TAMUZ, 22, 319)
 assetHebrewDate(new Date(2014,4,12), 5774, HebrewMonth.IYAR, 12, 250)
 
+shabbatTest()
 purimTest()

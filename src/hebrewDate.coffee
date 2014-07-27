@@ -1,5 +1,6 @@
 class HebrewDate
   constructor: (date) ->
+    @gregorianDate = date
     @hebrewYear = new HebrewYear(date)
     @dayOfYear = parseInt(HebrewDate.HELPERS.durationInGregorianDays(date, @hebrewYear.getThisRoshHashana().getGregorianDate()) + 1)
     dayOfMonth = @dayOfYear
@@ -16,6 +17,7 @@ class HebrewDate
   getYearFromCreation: -> @hebrewYear.getYearFromCreation()
   getDayOfYear: -> @dayOfYear
   getDayOfMonth: -> @dayOfMonth
+  isShabbat: -> 6 == @gregorianDate.getDay()
   isPurim: -> @staticHebrewMonth in [HebrewMonth.ADAR, HebrewMonth.ADAR_SHENI] && 14 == @dayOfMonth
 
 (->
