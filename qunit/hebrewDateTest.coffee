@@ -28,13 +28,15 @@ edgeTestOneDayChag = (name, date, otherOccasions = {}) ->
 
 edgeTestMultiDayChag = (name, date, length, otherOccasions = {}) ->
   otherOccasions.all ?= []
+  otherOccasions.during ?= []
+  otherOccasions.around ?= []
   before = new Date(date)
   before.setDate(before.getDate() - 1)
-  assertNotChag(name, before, (otherOccasions.before ? []).concat(otherOccasions.all))
+  assertNotChag(name, before, (otherOccasions.before ? []).concat(otherOccasions.all, otherOccasions.around))
   for i in [1..length]
-    assertIsChag(name, new Date(date), (otherOccasions["#{i}"] ? []).concat(otherOccasions.all))
+    assertIsChag(name, new Date(date), (otherOccasions["#{i}"] ? []).concat(otherOccasions.all, otherOccasions.during))
     date.setDate(date.getDate() + 1)
-  assertNotChag(name, date, (otherOccasions.after ? []).concat(otherOccasions['all']))
+  assertNotChag(name, date, (otherOccasions.after ? []).concat(otherOccasions.all, otherOccasions.around))
 
 shabbatTest = ->
   edgeTestOneDayChag('Shabbat', new Date(2014,6,19))
@@ -58,8 +60,8 @@ shabuotTest = ->
   edgeTestMultiDayChag('Shabuot', new Date(2015,4,24),2, before:['Shabbat'])
 
 roshHashanaTest = ->
-  edgeTestMultiDayChag('RoshHashana', new Date(2011,8,29),2, '1': ['10DaysOfTeshuba'], '2': ['10DaysOfTeshuba'], after: ['Shabbat', '10DaysOfTeshuba'])
-  edgeTestMultiDayChag('RoshHashana', new Date(2015,8,14),2, '1': ['10DaysOfTeshuba'], '2': ['10DaysOfTeshuba'], after: ['10DaysOfTeshuba'])
+  edgeTestMultiDayChag('RoshHashana', new Date(2011,8,29),2, during: ['10DaysOfTeshuba'], after: ['Shabbat', '10DaysOfTeshuba'])
+  edgeTestMultiDayChag('RoshHashana', new Date(2015,8,14),2, during: ['10DaysOfTeshuba'], after: ['10DaysOfTeshuba'])
 
 tenDaysOfTeshubaTest = ->
   edgeTestMultiDayChag('10DaysOfTeshuba', new Date(2011,8,29),10,'1': ['RoshHashana'], '2': ['RoshHashana'], '3': ['Shabbat'], '10': ['Shabbat', 'YomKippur'])
