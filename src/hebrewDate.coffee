@@ -17,11 +17,10 @@ class HebrewDate
   getYearFromCreation: -> @hebrewYear.getYearFromCreation()
   getDayOfYear: -> @dayOfYear
   getDayOfMonth: -> @dayOfMonth
+  monthAndRangeAre: (month, range) -> @staticHebrewMonth is HebrewMonth[month] && @dayOfMonth in range
   isShabbat: -> 6 == @gregorianDate.getDay()
   isPurim: -> @staticHebrewMonth in [HebrewMonth.ADAR, HebrewMonth.ADAR_SHENI] && 14 == @dayOfMonth
-  inTishri: -> @staticHebrewMonth is HebrewMonth.TISHRI
-  inNisan: -> @staticHebrewMonth is HebrewMonth.NISAN
-  isMoed: -> (@inNisan() && @dayOfMonth in [17..20]) || (@inTishri() && @dayOfMonth in [17..21])
+  isMoed: -> @monthAndRangeAre('NISAN', [17..20]) || @monthAndRangeAre('TISHRI', [17..21])
   occasions: -> result = []; (result.push(chag.replace(/^is/, '')) if chag.match(/^is/) && @[chag]()) for chag, val of @; result
 
 (->
