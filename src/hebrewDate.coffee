@@ -21,6 +21,7 @@ class HebrewDate
   isShabbat: -> 6 == @gregorianDate.getDay()
   isPurim: -> @staticHebrewMonth in [HebrewMonth.ADAR, HebrewMonth.ADAR_SHENI] && 14 == @dayOfMonth
   isMoed: -> @monthAndRangeAre('NISAN', [17..20]) || @monthAndRangeAre('TISHRI', [17..21])
+  isPesach: -> @monthAndRangeAre('NISAN', [15..22])
   occasions: -> result = []; (result.push(chag.replace(/^is/, '')) if chag.match(/^is/) && @[chag]()) for chag, val of @; result.sort()
 
 (->
