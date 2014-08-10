@@ -47,11 +47,19 @@ purimTest = ->
 
 moedTest = ->
   edgeTestMultiDayChag('Moed', new Date(2014,3,17),4,all: ['Pesach'], '3': ['Shabbat'])
-  edgeTestMultiDayChag('Moed', new Date(2014,9,11),5,'1': ['Shabbat'])
+  edgeTestMultiDayChag('Moed', new Date(2014,9,11),5,all: ['Sukkot'], '1': ['Shabbat'])
 
 pesachTest = ->
   edgeTestMultiDayChag('Pesach', new Date(2013,2,26),8,'3': ['Moed'], '4': ['Moed'], '5': ['Moed','Shabbat'], '6': ['Moed'])
   edgeTestMultiDayChag('Pesach', new Date(2015,3,4),8,'1': ['Shabbat'], '3': ['Moed'], '4': ['Moed'], '5': ['Moed'], '6': ['Moed'], '8': ['Shabbat'])
+
+shabuotTest = ->
+  edgeTestMultiDayChag('Shabuot', new Date(2013,4,15),2)
+  edgeTestMultiDayChag('Shabuot', new Date(2015,4,24),2, before:['Shabbat'])
+
+sukkotTest = ->
+  edgeTestMultiDayChag('Sukkot', new Date(2011,9,13),9,'3': ['Moed', 'Shabbat'], '4': ['Moed'], '5': ['Moed'], '6': ['Moed'], '7': ['Moed'], after: ['Shabbat'])
+  edgeTestMultiDayChag('Sukkot', new Date(2015,8,28),9,'3': ['Moed'], '4': ['Moed'], '5': ['Moed'], '6': ['Moed','Shabbat'], '7': ['Moed'])
 
 assetHebrewDate(new Date(2014,6,20), 5774, HebrewMonth.TAMUZ, 22, 319)
 assetHebrewDate(new Date(2014,4,12), 5774, HebrewMonth.IYAR, 12, 250)
@@ -60,3 +68,5 @@ shabbatTest()
 purimTest()
 moedTest()
 pesachTest()
+shabuotTest()
+sukkotTest()
