@@ -12,7 +12,7 @@ assertChag = (name, date, otherOccasions = [], _is) ->
     result = target["is#{name}"]()
     assert.ok(if _is then result else !result)
     otherOccasions.push(name) if _is
-    assert.deepEqual target.occasions(), otherOccasions
+    assert.deepEqual target.occasions(), otherOccasions.sort()
 
 assertIsChag = (name, date, otherOccasions) -> assertChag(name, date, otherOccasions, true)
 assertNotChag = (name, date, otherOccasions) -> assertChag(name, date, otherOccasions, false)
