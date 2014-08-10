@@ -23,6 +23,9 @@ class HebrewDate
   isMoed: -> @monthAndRangeAre('NISAN', [17..20]) || @monthAndRangeAre('TISHRI', [17..21])
   isPesach: -> @monthAndRangeAre('NISAN', [15..22])
   isShabuot: -> @monthAndRangeAre('SIVAN', [6..7])
+  isRoshHashana: -> @monthAndRangeAre('TISHRI', [1..2])
+  is10DaysOfTeshuba: -> @monthAndRangeAre('TISHRI', [1..10])
+  isYomKippur: -> @monthAndRangeAre('TISHRI', [10])
   isSukkot: -> @monthAndRangeAre('TISHRI', [15..23])
   occasions: -> result = []; (result.push(chag.replace(/^is/, '')) if chag.match(/^is/) && @[chag]()) for chag, val of @; result.sort()
 
