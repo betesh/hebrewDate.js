@@ -21,6 +21,9 @@ class HebrewDate
   isShabbat: -> 6 == @gregorianDate.getDay()
   adarOrAdar2: -> if @hebrewYear.isLeapYear() then 'ADAR_SHENI' else 'ADAR'
   isPurim: -> @monthAndRangeAre(@adarOrAdar2(), [14])
+  isShushanPurim: -> @monthAndRangeAre(@adarOrAdar2(), [15])
+  isPurimKatan: -> @monthAndRangeAre('ADAR_RISHON', [14])
+  isShushanPurimKatan: -> @monthAndRangeAre('ADAR_RISHON', [15])
   isMoed: -> @monthAndRangeAre('NISAN', [17..20]) || @monthAndRangeAre('TISHRI', [17..21])
   isPesach: -> @monthAndRangeAre('NISAN', [15..22])
   isShabuot: -> @monthAndRangeAre('SIVAN', [6..7])

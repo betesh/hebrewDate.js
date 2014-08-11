@@ -23,7 +23,7 @@ edgeTestOneDayChag = (name, date, otherOccasions = {}) ->
   after = new Date(date)
   after.setDate(after.getDate() + 1)
   assertNotChag(name, before, otherOccasions.before)
-  assertIsChag(name, date, otherOccasions.date)
+  assertIsChag(name, date, otherOccasions.during)
   assertNotChag(name, after, otherOccasions.after)
 
 edgeTestMultiDayChag = (name, date, length, otherOccasions = {}) ->
@@ -43,9 +43,13 @@ shabbatTest = ->
   edgeTestOneDayChag('Shabbat', new Date(2014,6,26))
 
 purimTest = ->
-  edgeTestOneDayChag('Purim', new Date(2014,2,16), before: ['Shabbat'])
-  assertNotChag('Purim', new Date(2014,1,14))
-  edgeTestOneDayChag('Purim', new Date(2013,1,24), before: ['Shabbat'])
+  edgeTestOneDayChag('Purim', new Date(2013,1,24), before: ['Shabbat'], after: ['ShushanPurim'])
+  edgeTestOneDayChag('Purim', new Date(2014,2,16), before: ['Shabbat'], after: ['ShushanPurim'])
+  assertNotChag('Purim', new Date(2014,1,14), ['PurimKatan'])
+  edgeTestOneDayChag('ShushanPurim', new Date(2013,1,25), before: ['Purim'])
+  edgeTestOneDayChag('ShushanPurim', new Date(2014,2,17), before: ['Purim'])
+  edgeTestOneDayChag('PurimKatan', new Date(2014,1,14), after: ['ShushanPurimKatan', 'Shabbat'])
+  edgeTestOneDayChag('ShushanPurimKatan', new Date(2014,1,15), during: ['Shabbat'], before: ['PurimKatan'])
 
 moedTest = ->
   edgeTestMultiDayChag('Moed', new Date(2014,3,17), 4, all: ['Pesach', 'Regel'], around: ['YomTob'], '3': ['Shabbat'])
