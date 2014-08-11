@@ -48,32 +48,32 @@ purimTest = ->
   edgeTestOneDayChag('Purim', new Date(2013,1,24), before: ['Shabbat'])
 
 moedTest = ->
-  edgeTestMultiDayChag('Moed', new Date(2014,3,17), 4, all: ['Pesach'], '3': ['Shabbat'])
-  edgeTestMultiDayChag('Moed', new Date(2014,9,11), 5, all: ['Sukkot'], '1': ['Shabbat'])
+  edgeTestMultiDayChag('Moed', new Date(2014,3,17), 4, all: ['Pesach', 'Regel'], around: ['YomTob'], '3': ['Shabbat'])
+  edgeTestMultiDayChag('Moed', new Date(2014,9,11), 5, all: ['Sukkot', 'Regel'], around: ['YomTob'], '1': ['Shabbat'])
 
 pesachTest = ->
-  edgeTestMultiDayChag('Pesach', new Date(2013,2,26), 8, '3': ['Moed'], '4': ['Moed'], '5': ['Moed','Shabbat'], '6': ['Moed'])
-  edgeTestMultiDayChag('Pesach', new Date(2015,3,4), 8, '1': ['Shabbat'], '3': ['Moed'], '4': ['Moed'], '5': ['Moed'], '6': ['Moed'], '8': ['Shabbat'])
+  edgeTestMultiDayChag('Pesach', new Date(2013,2,26), 8, '1': ['YomTob'], '2': ['YomTob'], '3': ['Moed'], '4': ['Moed'], '5': ['Moed','Shabbat'], '6': ['Moed'], '7': ['YomTob'], '8': ['YomTob'], during: ['Regel'])
+  edgeTestMultiDayChag('Pesach', new Date(2015,3,4), 8, '1': ['Shabbat', 'YomTob'], '2': ['YomTob'], '3': ['Moed'], '4': ['Moed'], '5': ['Moed'], '6': ['Moed'], '7': ['YomTob'], '8': ['Shabbat', 'YomTob'], during: ['Regel'])
 
 shabuotTest = ->
-  edgeTestMultiDayChag('Shabuot', new Date(2013,4,15), 2)
-  edgeTestMultiDayChag('Shabuot', new Date(2015,4,24), 2, before:['Shabbat'])
+  edgeTestMultiDayChag('Shabuot', new Date(2013,4,15), 2, during: ['Regel', 'YomTob'])
+  edgeTestMultiDayChag('Shabuot', new Date(2015,4,24), 2, before: ['Shabbat'], during: ['Regel', 'YomTob'])
 
 roshHashanaTest = ->
-  edgeTestMultiDayChag('RoshHashana', new Date(2011,8,29), 2, during: ['10DaysOfTeshuba'], after: ['Shabbat', '10DaysOfTeshuba'])
-  edgeTestMultiDayChag('RoshHashana', new Date(2015,8,14), 2, during: ['10DaysOfTeshuba'], after: ['10DaysOfTeshuba'])
+  edgeTestMultiDayChag('RoshHashana', new Date(2011,8,29), 2, during: ['10DaysOfTeshuba', 'YomTob'], after: ['Shabbat', '10DaysOfTeshuba'])
+  edgeTestMultiDayChag('RoshHashana', new Date(2015,8,14), 2, during: ['10DaysOfTeshuba', 'YomTob'], after: ['10DaysOfTeshuba'])
 
 tenDaysOfTeshubaTest = ->
-  edgeTestMultiDayChag('10DaysOfTeshuba', new Date(2011,8,29), 10, '1': ['RoshHashana'], '2': ['RoshHashana'], '3': ['Shabbat'], '10': ['Shabbat', 'YomKippur'])
-  edgeTestMultiDayChag('10DaysOfTeshuba', new Date(2015,8,14), 10, '1': ['RoshHashana'], '2': ['RoshHashana'], '6': ['Shabbat'], '10': ['YomKippur'])
+  edgeTestMultiDayChag('10DaysOfTeshuba', new Date(2011,8,29), 10, '1': ['RoshHashana', 'YomTob'], '2': ['RoshHashana', 'YomTob'], '3': ['Shabbat'], '10': ['Shabbat', 'YomKippur'])
+  edgeTestMultiDayChag('10DaysOfTeshuba', new Date(2015,8,14), 10, '1': ['RoshHashana', 'YomTob'], '2': ['RoshHashana', 'YomTob'], '6': ['Shabbat'], '10': ['YomKippur'])
 
 yomKippurTest = ->
   edgeTestMultiDayChag('YomKippur', new Date(2011,9,8), 1, before: ['10DaysOfTeshuba'], '1': ['Shabbat', '10DaysOfTeshuba'])
   edgeTestMultiDayChag('YomKippur', new Date(2015,8,23), 1, before: ['10DaysOfTeshuba'], '1': ['10DaysOfTeshuba'])
 
 sukkotTest = ->
-  edgeTestMultiDayChag('Sukkot', new Date(2011,9,13), 9, '3': ['Moed', 'Shabbat'], '4': ['Moed'], '5': ['Moed'], '6': ['Moed'], '7': ['Moed'], after: ['Shabbat'])
-  edgeTestMultiDayChag('Sukkot', new Date(2015,8,28), 9, '3': ['Moed'], '4': ['Moed'], '5': ['Moed'], '6': ['Moed','Shabbat'], '7': ['Moed'])
+  edgeTestMultiDayChag('Sukkot', new Date(2011,9,13), 9, '1': ['YomTob'], '2': ['YomTob'], '3': ['Moed', 'Shabbat'], '4': ['Moed'], '5': ['Moed'], '6': ['Moed'], '7': ['Moed'], '8': ['YomTob'], '9': ['YomTob'], after: ['Shabbat'], during: ['Regel'])
+  edgeTestMultiDayChag('Sukkot', new Date(2015,8,28), 9, '1': ['YomTob'], '2': ['YomTob'], '3': ['Moed'], '4': ['Moed'], '5': ['Moed'], '6': ['Moed','Shabbat'], '7': ['Moed'], '8': ['YomTob'], '9': ['YomTob'], during: ['Regel'])
 
 assetHebrewDate(new Date(2014,6,20), 5774, HebrewMonth.TAMUZ, 22, 319)
 assetHebrewDate(new Date(2014,4,12), 5774, HebrewMonth.IYAR, 12, 250)

@@ -27,6 +27,8 @@ class HebrewDate
   is10DaysOfTeshuba: -> @monthAndRangeAre('TISHRI', [1..10])
   isYomKippur: -> @monthAndRangeAre('TISHRI', [10])
   isSukkot: -> @monthAndRangeAre('TISHRI', [15..23])
+  isRegel: -> @isPesach() || @isShabuot() || @isSukkot()
+  isYomTob: -> @monthAndRangeAre('NISAN', [15,16,21,22]) || @isShabuot() || @monthAndRangeAre('TISHRI', [1,2,15,16,22,23])
   occasions: -> result = []; (result.push(chag.replace(/^is/, '')) if chag.match(/^is/) && @[chag]()) for chag, val of @; result.sort()
 
 (->
