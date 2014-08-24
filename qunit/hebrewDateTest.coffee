@@ -79,6 +79,11 @@ sukkotTest = ->
   edgeTestMultiDayChag('Sukkot', new Date(2011,9,13), 9, '1': ['YomTob'], '2': ['YomTob'], '3': ['Moed', 'Shabbat'], '4': ['Moed'], '5': ['Moed'], '6': ['Moed'], '7': ['Moed'], '8': ['YomTob'], '9': ['YomTob'], after: ['Shabbat'], during: ['Regel'])
   edgeTestMultiDayChag('Sukkot', new Date(2015,8,28), 9, '1': ['YomTob'], '2': ['YomTob'], '3': ['Moed'], '4': ['Moed'], '5': ['Moed'], '6': ['Moed','Shabbat'], '7': ['Moed'], '8': ['YomTob'], '9': ['YomTob'], during: ['Regel'])
 
+chanukkahTest = ->
+  edgeTestMultiDayChag('Chanukkah', new Date(2011,11,21), 8, '4': ['Shabbat'], '6': ['RoshHodesh'], '7': ['RoshHodesh'])
+  edgeTestMultiDayChag('Chanukkah', new Date(2012,11,9), 8, '6': ['RoshHodesh'], '7': ['Shabbat'], before: ['Shabbat'])
+  edgeTestMultiDayChag('Chanukkah', new Date(2013,10,28), 8, '3': ['Shabbat'], '6': ['RoshHodesh'], '7': ['RoshHodesh'])
+
 assetHebrewDate(new Date(2014,6,20), 5774, HebrewMonth.TAMUZ, 22, 319)
 assetHebrewDate(new Date(2014,4,12), 5774, HebrewMonth.IYAR, 12, 250)
 
@@ -91,3 +96,4 @@ roshHashanaTest()
 tenDaysOfTeshubaTest()
 yomKippurTest()
 sukkotTest()
+chanukkahTest()
