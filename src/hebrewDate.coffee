@@ -33,6 +33,7 @@ class HebrewDate
   isYomKippur: -> @monthAndRangeAre('TISHRI', [10])
   isSukkot: -> @monthAndRangeAre('TISHRI', [15..23])
   isRegel: -> @isPesach() || @isShabuot() || @isSukkot()
+  isErebYomTob: -> @monthAndRangeAre('NISAN', [14,20]) || @monthAndRangeAre('SIVAN', [5]) || @monthAndRangeAre('ELUL', [29]) || @monthAndRangeAre('TISHRI', [14,21])
   isYomTob: -> @monthAndRangeAre('NISAN', [15,16,21,22]) || @isShabuot() || @monthAndRangeAre('TISHRI', [1,2,15,16,22,23])
   isChanukkah: -> @monthAndRangeAre('KISLEV', [25..30]) || @monthAndRangeAre('TEVET', [1..(if @hebrewYear.getDaysInYear() % 10 > 3 then 2 else 3)])
   isRoshHodesh: -> @dayOfMonth in [1,30] && @staticHebrewMonth isnt HebrewMonth.TISHRI
