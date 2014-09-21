@@ -41,11 +41,11 @@ edgeTestMultiDayChag = (name, date, length, otherOccasions = {}) ->
 
 shabbatTest = ->
   edgeTestOneDayChag('Shabbat', new Date(2014,6,19), before: ['ErebShabbat'])
-  edgeTestOneDayChag('Shabbat', new Date(2014,6,26), before: ['ErebShabbat'])
+  edgeTestOneDayChag('Shabbat', new Date(2014,6,26), before: ['ErebShabbat'], during: ['ShabbatMevarechim'])
 
 purimTest = ->
-  edgeTestOneDayChag('Purim', new Date(2013,1,24), before: ['Shabbat'], after: ['ShushanPurim'])
-  edgeTestOneDayChag('Purim', new Date(2014,2,16), before: ['Shabbat'], after: ['ShushanPurim'])
+  edgeTestOneDayChag('Purim', new Date(2013,1,24), before: ['Shabbat', 'ShabbatZachor'], after: ['ShushanPurim'])
+  edgeTestOneDayChag('Purim', new Date(2014,2,16), before: ['Shabbat', 'ShabbatZachor'], after: ['ShushanPurim'])
   assertNotChag('Purim', new Date(2014,1,14), ['PurimKatan', 'ErebShabbat'])
   edgeTestOneDayChag('ShushanPurim', new Date(2013,1,25), before: ['Purim'])
   edgeTestOneDayChag('ShushanPurim', new Date(2014,2,17), before: ['Purim'])
@@ -53,47 +53,47 @@ purimTest = ->
   edgeTestOneDayChag('ShushanPurimKatan', new Date(2014,1,15), during: ['Shabbat'], before: ['PurimKatan', 'ErebShabbat'])
 
 moedTest = ->
-  edgeTestMultiDayChag('Moed', new Date(2014,3,17), 4, all: ['Pesach', 'Regel'], around: ['YomTob'], '2': ['ErebShabbat'], '3': ['Shabbat'], '4': ['ErebYomTob'])
-  edgeTestMultiDayChag('Moed', new Date(2014,9,11), 5, all: ['Sukkot', 'Regel'], around: ['YomTob'], before: ['ErebShabbat'], '1': ['Shabbat'], '5': ['ErebYomTob'])
+  edgeTestMultiDayChag('Moed', new Date(2014,3,17), 4, all: ['Pesach', 'Regel'], around: ['YomTob'], '2': ['ErebShabbat'], '3': ['Shabbat'], '4': ['ErebYomTob', '6thDayOfPesach'], after: ['1stDayOfYomTob', '7thDayOfPesach'])
+  edgeTestMultiDayChag('Moed', new Date(2014,9,11), 5, all: ['Sukkot', 'Regel'], around: ['YomTob'], before: ['ErebShabbat'], '1': ['Shabbat'], '5': ['ErebYomTob', 'ErubTabshilin'], after: ['1stDayOfYomTob'])
 
 pesachTest = ->
-  edgeTestMultiDayChag('Pesach', new Date(2013,2,26), 8, before: ['ErebYomTob'], '1': ['YomTob'], '2': ['YomTob'], '3': ['Moed'], '4': ['Moed', 'ErebShabbat'], '5': ['Moed','Shabbat'], '6': ['Moed', 'ErebYomTob'], '7': ['YomTob'], '8': ['YomTob'], during: ['Regel'])
-  edgeTestMultiDayChag('Pesach', new Date(2015,3,4), 8, before: ['ErebShabbat', 'ErebYomTob'], '1': ['Shabbat', 'YomTob'], '2': ['YomTob'], '3': ['Moed'], '4': ['Moed'], '5': ['Moed'], '6': ['Moed', 'ErebYomTob'], '7': ['YomTob', 'ErebShabbat'], '8': ['Shabbat', 'YomTob'], during: ['Regel'])
+  edgeTestMultiDayChag('Pesach', new Date(2013,2,26), 8, before: ['ErebYomTob'], '1': ['YomTob', '1stDayOfYomTob'], '2': ['YomTob'], '3': ['Moed'], '4': ['Moed', 'ErebShabbat'], '5': ['Moed','Shabbat'], '6': ['Moed', 'ErebYomTob', '6thDayOfPesach'], '7': ['YomTob', '1stDayOfYomTob', '7thDayOfPesach'], '8': ['YomTob'], during: ['Regel'])
+  edgeTestMultiDayChag('Pesach', new Date(2015,3,4), 8, before: ['ErebShabbat', 'ErebYomTob'], '1': ['Shabbat', 'YomTob', '1stDayOfYomTob'], '2': ['YomTob'], '3': ['Moed'], '4': ['Moed'], '5': ['Moed'], '6': ['Moed', 'ErebYomTob', 'ErubTabshilin', '6thDayOfPesach'], '7': ['YomTob', 'ErebShabbat', '1stDayOfYomTob', '7thDayOfPesach'], '8': ['Shabbat', 'YomTob'], during: ['Regel'])
 
 shabuotTest = ->
-  edgeTestMultiDayChag('Shabuot', new Date(2013,4,15), 2, before: ['ErebYomTob'], during: ['Regel', 'YomTob'], after: ['ErebShabbat'])
-  edgeTestMultiDayChag('Shabuot', new Date(2015,4,24), 2, before: ['Shabbat', 'ErebYomTob'], during: ['Regel', 'YomTob'])
+  edgeTestMultiDayChag('Shabuot', new Date(2013,4,15), 2, before: ['ErebYomTob'], '1':['1stDayOfYomTob', '1stDayOfShabuot'], during: ['Regel', 'YomTob'], after: ['ErebShabbat'])
+  edgeTestMultiDayChag('Shabuot', new Date(2015,4,24), 2, before: ['Shabbat', 'ErebYomTob'], '1':['1stDayOfYomTob', '1stDayOfShabuot'], during: ['Regel', 'YomTob'])
 
 roshHashanaTest = ->
-  edgeTestMultiDayChag('RoshHashana', new Date(2011,8,29), 2, before: ['ErebYomTob'], during: ['10DaysOfTeshuba', 'YomTob'], '2': ['ErebShabbat'], after: ['Shabbat', '10DaysOfTeshuba'])
-  edgeTestMultiDayChag('RoshHashana', new Date(2015,8,14), 2, before: ['ErebYomTob'], during: ['10DaysOfTeshuba', 'YomTob'], after: ['10DaysOfTeshuba'])
+  edgeTestMultiDayChag('RoshHashana', new Date(2011,8,29), 2, before: ['ErebYomTob', 'HataratNedarim', 'ErubTabshilin'], during: ['10DaysOfTeshuba', 'YomTob'], '1': ['1stDayOfYomTob'], '2': ['ErebShabbat'], after: ['Shabbat', '10DaysOfTeshuba'])
+  edgeTestMultiDayChag('RoshHashana', new Date(2015,8,14), 2, before: ['ErebYomTob', 'HataratNedarim'], during: ['10DaysOfTeshuba', 'YomTob'], '1': ['1stDayOfYomTob'], after: ['10DaysOfTeshuba', 'FastOfGedaliah', 'Taanit'])
 
 tenDaysOfTeshubaTest = ->
-  edgeTestMultiDayChag('10DaysOfTeshuba', new Date(2011,8,29), 10, before: ['ErebYomTob'], '1': ['RoshHashana', 'YomTob'], '2': ['RoshHashana', 'YomTob', 'ErebShabbat'], '3': ['Shabbat'], '9': ['ErebShabbat'], '10': ['Shabbat', 'YomKippur'])
-  edgeTestMultiDayChag('10DaysOfTeshuba', new Date(2015,8,14), 10, before: ['ErebYomTob'], '1': ['RoshHashana', 'YomTob'], '2': ['RoshHashana', 'YomTob'], '5': ['ErebShabbat'], '6': ['Shabbat'], '10': ['YomKippur'])
+  edgeTestMultiDayChag('10DaysOfTeshuba', new Date(2011,8,29), 10, before: ['ErebYomTob', 'HataratNedarim', 'ErubTabshilin'], '1': ['RoshHashana', 'YomTob', '1stDayOfYomTob'], '2': ['RoshHashana', 'YomTob', 'ErebShabbat'], '3': ['Shabbat'], '4': ['FastOfGedaliah', 'Taanit'], '9': ['ErebShabbat', 'ErebYomKippur', 'HataratNedarim'], '10': ['Shabbat', 'YomKippur'])
+  edgeTestMultiDayChag('10DaysOfTeshuba', new Date(2015,8,14), 10, before: ['ErebYomTob', 'HataratNedarim'], '1': ['RoshHashana', 'YomTob', '1stDayOfYomTob'], '2': ['RoshHashana', 'YomTob'], '3': ['FastOfGedaliah', 'Taanit'], '5': ['ErebShabbat'], '6': ['Shabbat'], '9': ['HataratNedarim', 'ErebYomKippur'], '10': ['YomKippur'])
 
 yomKippurTest = ->
-  edgeTestMultiDayChag('YomKippur', new Date(2011,9,8), 1, before: ['10DaysOfTeshuba', 'ErebShabbat'], '1': ['Shabbat', '10DaysOfTeshuba'])
-  edgeTestMultiDayChag('YomKippur', new Date(2015,8,23), 1, before: ['10DaysOfTeshuba'], '1': ['10DaysOfTeshuba'])
+  edgeTestMultiDayChag('YomKippur', new Date(2011,9,8), 1, before: ['10DaysOfTeshuba', 'ErebShabbat', 'HataratNedarim', 'ErebYomKippur'], '1': ['Shabbat', '10DaysOfTeshuba'])
+  edgeTestMultiDayChag('YomKippur', new Date(2015,8,23), 1, before: ['10DaysOfTeshuba', 'HataratNedarim', 'ErebYomKippur'], '1': ['10DaysOfTeshuba'])
 
 sukkotTest = ->
-  edgeTestMultiDayChag('Sukkot', new Date(2011,9,13), 9, before: ['ErebYomTob'], '1': ['YomTob'], '2': ['YomTob', 'ErebShabbat'], '3': ['Moed', 'Shabbat'], '4': ['Moed'], '5': ['Moed'], '6': ['Moed'], '7': ['Moed', 'ErebYomTob'], '8': ['YomTob'], '9': ['YomTob', 'ErebShabbat'], after: ['Shabbat'], during: ['Regel'])
-  edgeTestMultiDayChag('Sukkot', new Date(2015,8,28), 9, before: ['ErebYomTob'], '1': ['YomTob'], '2': ['YomTob'], '3': ['Moed'], '4': ['Moed'], '5': ['Moed', 'ErebShabbat'], '6': ['Moed','Shabbat'], '7': ['Moed', 'ErebYomTob'], '8': ['YomTob'], '9': ['YomTob'], during: ['Regel'])
+  edgeTestMultiDayChag('Sukkot', new Date(2011,9,13), 9, before: ['ErebYomTob', 'ErubTabshilin'], '1': ['YomTob', '1stDayOfYomTob'], '2': ['YomTob', 'ErebShabbat'], '3': ['Moed', 'Shabbat'], '4': ['Moed'], '5': ['Moed'], '6': ['Moed'], '7': ['Moed', 'ErebYomTob', 'ErubTabshilin'], '8': ['YomTob', '1stDayOfYomTob'], '9': ['YomTob', 'ErebShabbat'], after: ['Shabbat', 'ShabbatMevarechim'], during: ['Regel'])
+  edgeTestMultiDayChag('Sukkot', new Date(2015,8,28), 9, before: ['ErebYomTob'], '1': ['YomTob', '1stDayOfYomTob'], '2': ['YomTob'], '3': ['Moed'], '4': ['Moed'], '5': ['Moed', 'ErebShabbat'], '6': ['Moed','Shabbat'], '7': ['Moed', 'ErebYomTob'], '8': ['YomTob', '1stDayOfYomTob'], '9': ['YomTob'], during: ['Regel'])
 
 chanukkahTest = ->
-  edgeTestMultiDayChag('Chanukkah', new Date(2011,11,21), 8, '3': ['ErebShabbat'], '4': ['Shabbat'], '6': ['RoshHodesh'], '7': ['RoshHodesh'])
-  edgeTestMultiDayChag('Chanukkah', new Date(2012,11,9), 8, '6': ['RoshHodesh', 'ErebShabbat'], '7': ['Shabbat'], before: ['Shabbat'])
-  edgeTestMultiDayChag('Chanukkah', new Date(2013,10,28), 8, '2': ['ErebShabbat'], '3': ['Shabbat'], '6': ['RoshHodesh'], '7': ['RoshHodesh', 'BeginTalUmatar'], after: ['ErebShabbat'])
+  edgeTestMultiDayChag('Chanukkah', new Date(2011,11,21), 8, '3': ['ErebShabbat'], '4': ['Shabbat', 'ShabbatMevarechim'], '6': ['RoshHodesh'], '7': ['RoshHodesh'])
+  edgeTestMultiDayChag('Chanukkah', new Date(2012,11,9), 8, '6': ['RoshHodesh', 'ErebShabbat'], '7': ['Shabbat'], before: ['Shabbat', 'ShabbatMevarechim'])
+  edgeTestMultiDayChag('Chanukkah', new Date(2013,10,28), 8, '2': ['ErebShabbat'], '3': ['Shabbat', 'ShabbatMevarechim'], '6': ['RoshHodesh'], '7': ['RoshHodesh', 'BeginTalUmatar'], after: ['ErebShabbat'])
 
 beginTalUmatarTest = ->
   edgeTestOneDayChag('BeginTalUmatar', new Date(1898,11,3), before: ['ErebShabbat'], during: ['Shabbat'])
   edgeTestOneDayChag('BeginTalUmatar', new Date(1899,11,4), before: ['RoshHodesh', 'Chanukkah'], during: ['Chanukkah'])
-  edgeTestOneDayChag('BeginTalUmatar', new Date(1999,11,5), all: ['Chanukkah'], before: ['Shabbat'])
-  edgeTestOneDayChag('BeginTalUmatar', new Date(2010,11,4), all: ['Chanukkah'], before: ['ErebShabbat'], during: ['Shabbat'])
+  edgeTestOneDayChag('BeginTalUmatar', new Date(1999,11,5), all: ['Chanukkah'], before: ['Shabbat', 'ShabbatMevarechim'])
+  edgeTestOneDayChag('BeginTalUmatar', new Date(2010,11,4), all: ['Chanukkah'], before: ['ErebShabbat'], during: ['Shabbat', 'ShabbatMevarechim'])
   edgeTestOneDayChag('BeginTalUmatar', new Date(2011,11,5))
   edgeTestOneDayChag('BeginTalUmatar', new Date(2012,11,4))
   edgeTestOneDayChag('BeginTalUmatar', new Date(2013,11,4), all: ['Chanukkah'], before: ['RoshHodesh'], during: ['RoshHodesh'])
-  edgeTestOneDayChag('BeginTalUmatar', new Date(2099,11,5), before: ['ErebShabbat'], during: ['Shabbat'])
+  edgeTestOneDayChag('BeginTalUmatar', new Date(2099,11,5), before: ['ErebShabbat'], during: ['Shabbat', 'ShabbatMevarechim'])
   edgeTestOneDayChag('BeginTalUmatar', new Date(2100,11,5), before: ['Shabbat'])
   edgeTestOneDayChag('BeginTalUmatar', new Date(2101,11,5))
   edgeTestOneDayChag('BeginTalUmatar', new Date(2102,11,5), after: ['Chanukkah'])
