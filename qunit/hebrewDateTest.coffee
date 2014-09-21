@@ -18,13 +18,14 @@ assertIsChag = (name, date, otherOccasions) -> assertChag(name, date, otherOccas
 assertNotChag = (name, date, otherOccasions) -> assertChag(name, date, otherOccasions, false)
 
 edgeTestOneDayChag = (name, date, otherOccasions = {}) ->
+  otherOccasions.all ?= []
   before = new Date(date)
   before.setDate(before.getDate() - 1)
   after = new Date(date)
   after.setDate(after.getDate() + 1)
-  assertNotChag(name, before, otherOccasions.before)
-  assertIsChag(name, date, otherOccasions.during)
-  assertNotChag(name, after, otherOccasions.after)
+  assertNotChag(name, before, (otherOccasions.before ? []).concat(otherOccasions.all))
+  assertIsChag(name, date, (otherOccasions.during ? []).concat(otherOccasions.all))
+  assertNotChag(name, after, (otherOccasions.after ? []).concat(otherOccasions.all))
 
 edgeTestMultiDayChag = (name, date, length, otherOccasions = {}) ->
   otherOccasions.all ?= []
@@ -82,7 +83,21 @@ sukkotTest = ->
 chanukkahTest = ->
   edgeTestMultiDayChag('Chanukkah', new Date(2011,11,21), 8, '3': ['ErebShabbat'], '4': ['Shabbat'], '6': ['RoshHodesh'], '7': ['RoshHodesh'])
   edgeTestMultiDayChag('Chanukkah', new Date(2012,11,9), 8, '6': ['RoshHodesh', 'ErebShabbat'], '7': ['Shabbat'], before: ['Shabbat'])
-  edgeTestMultiDayChag('Chanukkah', new Date(2013,10,28), 8, '2': ['ErebShabbat'], '3': ['Shabbat'], '6': ['RoshHodesh'], '7': ['RoshHodesh'], after: ['ErebShabbat'])
+  edgeTestMultiDayChag('Chanukkah', new Date(2013,10,28), 8, '2': ['ErebShabbat'], '3': ['Shabbat'], '6': ['RoshHodesh'], '7': ['RoshHodesh', 'BeginTalUmatar'], after: ['ErebShabbat'])
+
+beginTalUmatarTest = ->
+  edgeTestOneDayChag('BeginTalUmatar', new Date(1898,11,3), before: ['ErebShabbat'], during: ['Shabbat'])
+  edgeTestOneDayChag('BeginTalUmatar', new Date(1899,11,4), before: ['RoshHodesh', 'Chanukkah'], during: ['Chanukkah'])
+  edgeTestOneDayChag('BeginTalUmatar', new Date(1999,11,5), all: ['Chanukkah'], before: ['Shabbat'])
+  edgeTestOneDayChag('BeginTalUmatar', new Date(2010,11,4), all: ['Chanukkah'], before: ['ErebShabbat'], during: ['Shabbat'])
+  edgeTestOneDayChag('BeginTalUmatar', new Date(2011,11,5))
+  edgeTestOneDayChag('BeginTalUmatar', new Date(2012,11,4))
+  edgeTestOneDayChag('BeginTalUmatar', new Date(2013,11,4), all: ['Chanukkah'], before: ['RoshHodesh'], during: ['RoshHodesh'])
+  edgeTestOneDayChag('BeginTalUmatar', new Date(2099,11,5), before: ['ErebShabbat'], during: ['Shabbat'])
+  edgeTestOneDayChag('BeginTalUmatar', new Date(2100,11,5), before: ['Shabbat'])
+  edgeTestOneDayChag('BeginTalUmatar', new Date(2101,11,5))
+  edgeTestOneDayChag('BeginTalUmatar', new Date(2102,11,5), after: ['Chanukkah'])
+  edgeTestOneDayChag('BeginTalUmatar', new Date(2103,11,6), after: ['ErebShabbat'])
 
 assetHebrewDate(new Date(2014,6,20), 5774, HebrewMonth.TAMUZ, 22, 319)
 assetHebrewDate(new Date(2014,4,12), 5774, HebrewMonth.IYAR, 12, 250)
@@ -97,3 +112,4 @@ tenDaysOfTeshubaTest()
 yomKippurTest()
 sukkotTest()
 chanukkahTest()
+beginTalUmatarTest()

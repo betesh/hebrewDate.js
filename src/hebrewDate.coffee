@@ -37,6 +37,7 @@ class HebrewDate
   isYomTob: -> @monthAndRangeAre('NISAN', [15,16,21,22]) || @isShabuot() || @monthAndRangeAre('TISHRI', [1,2,15,16,22,23])
   isChanukkah: -> @monthAndRangeAre('KISLEV', [25..30]) || @monthAndRangeAre('TEVET', [1..(if @hebrewYear.getDaysInYear() % 10 > 3 then 2 else 3)])
   isRoshHodesh: -> @dayOfMonth in [1,30] && @staticHebrewMonth isnt HebrewMonth.TISHRI
+  isBeginTalUmatar: -> @gregorianDate.getMonth() == 11 && @gregorianDate.getDate() == (parseInt((@gregorianDate.getFullYear())/ 100) - parseInt((@gregorianDate.getFullYear())/ 400) - 11 + parseInt((4 - (@gregorianDate.getFullYear() + 1) % 4) / 4))
   occasions: -> result = []; (result.push(chag.replace(/^is/, '')) if chag.match(/^is/) && @[chag]()) for chag, val of @; result.sort()
 
 (->
