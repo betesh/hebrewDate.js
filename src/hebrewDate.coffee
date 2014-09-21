@@ -38,6 +38,35 @@ class HebrewDate
   isChanukkah: -> @monthAndRangeAre('KISLEV', [25..30]) || @monthAndRangeAre('TEVET', [1..(if @hebrewYear.getDaysInYear() % 10 > 3 then 2 else 3)])
   isRoshHodesh: -> @dayOfMonth in [1,30] && @staticHebrewMonth isnt HebrewMonth.TISHRI
   isBeginTalUmatar: -> @gregorianDate.getMonth() == 11 && @gregorianDate.getDate() == (parseInt((@gregorianDate.getFullYear())/ 100) - parseInt((@gregorianDate.getFullYear())/ 400) - 11 + parseInt((4 - (@gregorianDate.getFullYear() + 1) % 4) / 4))
+  # TODO: Missing tests from here
+  isMaharHodesh: -> 29 == @dayOfMonth && @isShabbat()
+  inElul: -> @staticHebrewMonth is HebrewMonth.ELUL
+  isShabbatMevarechim: -> @dayOfMonth in [23..29] && @isShabbat() && !@inElul()
+  isHachrazatTaanit: -> @isShabbat() && (@monthAndRangeAre('TEVET', [4..9]) || @monthAndRangeAre('TAMUZ', [11..17]))
+  isShabbatSheqalim: -> @isShabbat() && (@monthAndRangeAre((if @hebrewYear.isLeapYear() then 'ADAR_RISHON' else 'SHEBAT'), [25..30]) || @monthAndRangeAre(@adarOrAdar2(), [1]))
+  isShabbatZachor: -> @isShabbat() && @monthAndRangeAre(@adarOrAdar2(), [8..13])
+  isShabbatParah: -> @isShabbat() && @monthAndRangeAre(@adarOrAdar2(), [18..23])
+  isShabbatHaHodesh: -> @isShabbat() && (@monthAndRangeAre(@adarOrAdar2(), [25..29]) || @monthAndRangeAre('NISAN', [1]))
+  isShabbatHaGadol: -> @isShabbat() && @monthAndRangeAre('NISAN', [8..14])
+  isTuBiShvat: -> @monthAndRangeAre('SHEBAT', [15])
+  isPesachSheni: -> @monthAndRangeAre('IYAR', [14])
+  isLagLaomer: -> @monthAndRangeAre('IYAR', [18])
+  isTuBAb: -> @monthAndRangeAre('AB', [15])
+  is17Tammuz: -> !@isShabbat() && @monthAndRangeAre('TAMUZ', if 0 == @gregorianDate.getDay() then [17..18] else [17])
+  is9Ab: -> !@isShabbat() && @monthAndRangeAre('AB', if 0 == @gregorianDate.getDay() then [9..10] else [9])
+  isFastOfGedaliah: -> !@isShabbat() && @monthAndRangeAre('TISHRI', if 0 == @gregorianDate.getDay() then [4] else [3])
+  is10Tevet: -> @monthAndRangeAre('TEVET', [10])
+  isTaanitEster: -> !@isShabbat() && @monthAndRangeAre(@adarOrAdar2(), if 4 == @gregorianDate.getDay() then [11,13] else [13])
+  isEreb9Av: -> !@isErebShabbat() && @monthAndRangeAre('AB', if @isShabbat() then [8..9] else [8])
+  isErebYomKippur: -> @monthAndRangeAre('TISHRI', [9])
+  is1stDayOfYomTob: -> @monthAndRangeAre('NISAN', [15,21]) || @is1stDayOfShabuot() || @monthAndRangeAre('TISHRI', [1,15,22])
+  is1stDayOfShabuot: -> @monthAndRangeAre('SIVAN', [6])
+  is6thDayOfPesach: -> @monthAndRangeAre('NISAN', [20])
+  is7thDayOfPesach: -> @monthAndRangeAre('NISAN', [21])
+  isErubTabshilin: -> @isErebYomTob() && @gregorianDate.getDay() in [3,4]
+  isTaanit: -> @is9Ab() || @is17Tammuz() || @isFastOfGedaliah() || @isTaanitEster() || @is10Tevet()
+  isHataratNedarim: -> @monthAndRangeAre('AB', [19,29]) || @monthAndRangeAre('ELUL', [29]) || @monthAndRangeAre('TISHRI', [9])
+  # Till here
   occasions: -> result = []; (result.push(chag.replace(/^is/, '')) if chag.match(/^is/) && @[chag]()) for chag, val of @; result.sort()
 
 (->
@@ -47,5 +76,15 @@ class HebrewDate
     durationInHebrewDays: (end_date, begin_date) -> @durationInGregorianDays(end_date.getGregorianDate(), begin_date.getGregorianDate())
   }
 ).call(HebrewDate)
+
+HebrewDate.prototype.isRoshHaShana = HebrewDate.prototype.isRoshHaShanah = HebrewDate.prototype.isRoshHashanah = HebrewDate.prototype.isRoshHashana
+HebrewDate.prototype.isYomTov = HebrewDate.prototype.isYomTob
+HebrewDate.prototype.isRoshChodesh = HebrewDate.prototype.isRoshHodesh
+HebrewDate.prototype.isLagBaOmer = HebrewDate.prototype.isLagLaOmer = HebrewDate.prototype.isLagBaomer = HebrewDate.prototype.isLagLaomer
+HebrewDate.prototype.isHanuka = HebrewDate.prototype.isHanukka = HebrewDate.prototype.isHanukah = HebrewDate.prototype.isHanukkah = HebrewDate.prototype.isChanuka = HebrewDate.prototype.isChanukka = HebrewDate.prototype.isChanukah = HebrewDate.prototype.isChanukkah
+HebrewDate.prototype.is17Tamuz = HebrewDate.prototype.is17Tammuz
+HebrewDate.prototype.is9Av = HebrewDate.prototype.is9Ab
+HebrewDate.prototype.isTzomGedalia = HebrewDate.prototype.isTzomGedaliah = HebrewDate.prototype.isFastOfGedalia = HebrewDate.prototype.isFastOfGedaliah
+HebrewDate.prototype.isTaanitEsther = HebrewDate.prototype.isTaanitEster
 
 (exports ? this).HebrewDate = HebrewDate
