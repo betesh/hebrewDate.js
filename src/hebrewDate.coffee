@@ -67,7 +67,9 @@ class HebrewDate
   isTaanit: -> @is9Ab() || @is17Tammuz() || @isFastOfGedaliah() || @isTaanitEster() || @is10Tevet()
   isHataratNedarim: -> @monthAndRangeAre('AB', [19,29]) || @monthAndRangeAre('ELUL', [29]) || @monthAndRangeAre('TISHRI', [9])
   # Till here
+  weekOfYear: -> parseInt((@dayOfYear + 4 - @gregorianDate.getDay()) / 7) + 1
   occasions: -> result = []; (result.push(chag.replace(/^is/, '')) if chag.match(/^is/) && @[chag]() && !(@[chag] in (@["is#{alias}"] for alias in result))) for chag, val of @; result.sort()
+  sedra: -> @hebrewYear.sedrot().sedra(@)
 
 (->
   @HELPERS = {

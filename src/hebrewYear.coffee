@@ -16,5 +16,6 @@ class HebrewYear
   getNextRoshHashana: -> @nextRoshHashana
   isLeapYear: -> @daysInYear in [383, 384, 385]
   getYearFromCreation: -> @yearFromCreation
+  sedrot: -> new Sedra(@)
 
 (exports ? this).HebrewYear = HebrewYear
