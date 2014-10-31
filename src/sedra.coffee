@@ -6,13 +6,13 @@ class Sedra
     @sedrot = (if isLeapYear then Sedra.SEDROT else Sedra.PESHUTA_SEDROT).slice(0)
     @sedrot.splice(@sedrot.indexOf('וַיַּקְהֵל'), 2, 'וַיַּקְהֵל-פְקוּדֵי') if !isLeapYear && (4 != yearBeginsOn || 2 != yearEndsOn)
     switch yearBeginsOn
-      when 6 then @sedrot.splice(0, 0, 'רֹאשׁ הַשָּׁנָה', 'הַאֲזִינוּ', 'סֻּכּוֹת', 'שְּׁמִינִי עֲצֶרֶת')
-      when 4 then @sedrot.splice(0, 0, '', 'הַאֲזִינוּ', 'יוֹם הַכִּפֻּרִים', 'סֻּכּוֹת')
-      else @sedrot.splice(0, 0, '', 'וַיֵּלֶךְ', 'הַאֲזִינוּ', 'סֻּכּוֹת')
+      when 6 then @sedrot.splice(0, 0, 'רֹאשׁ הַשָּׁנָה', 'הַאֲזִינוּ','חַג הַסֻּכּוֹת', 'שְּׁמִינִי עֲצֶרֶת')
+      when 4 then @sedrot.splice(0, 0, '', 'הַאֲזִינוּ', 'יוֹם הַכִּפֻּרִים', 'חַג הַסֻּכּוֹת')
+      else @sedrot.splice(0, 0, '', 'וַיֵּלֶךְ', 'הַאֲזִינוּ', 'חַג הַסֻּכּוֹת')
     switch yearEndsOn
       when 6
         @sedrot.splice(@sedrot.indexOf('חֻקַּת'), 2, 'חֻקַּת-בָּלָק')
-        @sedrot.splice(@sedrot.indexOf('נָשֹׂא'), 0, 'שָׁבֻעוֹת')
+        @sedrot.splice(@sedrot.indexOf('נָשֹׂא'), 0, 'חַג הַשָׁבֻעוֹת')
         @sedrot.splice(@sedrot.length - 4, 4, 'נִצָּבִים-וַיֵּלֶךְ', 'רֹאשׁ הַשָּׁנָה')
       when 4
         @sedrot.splice(@sedrot.length - 4, 4, 'נִצָּבִים-וַיֵּלֶךְ', 'הַאֲזִינוּ')
@@ -21,7 +21,7 @@ class Sedra
       when 1
         @sedrot.splice(@sedrot.length - 2, 2)
     @sedrot.splice(@sedrot.indexOf('מַּטּוֹת'), 2, 'מַּטּוֹת-מַסְעֵי') if 4 != yearEndsOn || !isLeapYear
-    @sedrot.splice(@sedrot.length - 23, 0, 'פֶּסַח')
+    @sedrot.splice(@sedrot.length - 23, 0, 'חַג הַפֶּסַח')
     @sedrot.splice(@sedrot.length - 23, 0, 'אַחֲרוֹן שֶׁל פֶּסַח') if 1 == yearEndsOn
   sedra: (hebrewDate) -> @sedrot[hebrewDate.weekOfYear()]
 
