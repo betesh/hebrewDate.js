@@ -29,7 +29,7 @@ class Molad
 
   @LUNAR_CYCLE = 29 * @HALAKIM_PER_DAY + 12 * @HALAKIM_PER_HOUR + 793
 
-  @EPOCH = { molad: new Molad(-10 * @HALAKIM_PER_HOUR), year: 2, gregorianDate: new Date(-3759, 7, 27)}
+  @EPOCH = { molad: new Molad(9 * @HALAKIM_PER_HOUR + 975), year: 5320, gregorianDate: new Date(1559, 8, 12)}
   @leapMonthsSinceEpoch = (hebrewYear) -> leapMonthsInHistory(hebrewYear) - leapMonthsInHistory(@EPOCH.year)
   @monthSinceEpoch = (hebrewYear) -> (hebrewYear - @EPOCH.year) * 12 + @leapMonthsSinceEpoch(hebrewYear)
   @daysSinceEpoch = (hebrewYear) -> parseInt(((@monthSinceEpoch(hebrewYear) * @LUNAR_CYCLE) + @EPOCH.molad.halakimIntoDay) / @HALAKIM_PER_DAY)
