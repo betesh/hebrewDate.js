@@ -70,6 +70,17 @@ class HebrewDate
   weekOfYear: -> parseInt((@dayOfYear + 4 - @gregorianDate.getDay()) / 7) + 1
   occasions: -> result = []; (result.push(chag.replace(/^is/, '')) if chag.match(/^is/) && @[chag]() && !(@[chag] in (@["is#{alias}"] for alias in result))) for chag, val of @; result.sort()
   sedra: -> @hebrewYear.sedrot().sedra(@)
+  omer: -> @_omer ?= (switch @staticHebrewMonth
+    when HebrewMonth.NISAN then (
+      if (@dayOfMonth > 15) then { today: @dayOfMonth - 15, tonight: @dayOfMonth - 14 }
+      else if 15 == @dayOfMonth then { tonight: @dayOfMonth - 14 }
+      else null)
+    when HebrewMonth.IYAR then { today: 15 + @dayOfMonth, tonight: 16 + @dayOfMonth }
+    when HebrewMonth.SIVAN then (
+      if (@dayOfMonth < 5) then { today: @dayOfMonth + 44, tonight: @dayOfMonth + 45 }
+      else if 5 == @dayOfMonth then { today: @dayOfMonth + 44 }
+      else null)
+    else null)
 
 (->
   @HELPERS = {

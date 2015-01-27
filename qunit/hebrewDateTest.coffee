@@ -99,6 +99,24 @@ beginTalUmatarTest = ->
   edgeTestOneDayChag('BeginTalUmatar', new Date(2102,11,5), after: ['Chanukkah'])
   edgeTestOneDayChag('BeginTalUmatar', new Date(2103,11,6), after: ['ErebShabbat'])
 
+omerTest = (date, omerDay) ->
+  QUnit.test "#{date} is day #{omerDay} of the omer", (assert) ->
+    actual = new HebrewDate(date)
+    assert.deepEqual actual.omer(), { today: omerDay, tonight: omerDay + 1 }
+
+omerEdgeTest = (date, omerDay, prop) ->
+  QUnit.test "On #{date}, day #{omerDay} of the omer is #{prop}", (assert) ->
+    actual = new HebrewDate(date)
+    assert.equal actual.omer()[prop], omerDay
+    size = 0
+    size++ for k,v of actual.omer()
+    assert.equal size, 1
+
+notOmerTest = (date) ->
+  QUnit.test "#{date} is not during the omer", (assert) ->
+    actual = new HebrewDate(date)
+    assert.ok not actual.omer()
+
 assetHebrewDate(new Date(2014,6,20), 5774, HebrewMonth.TAMUZ, 22, 319)
 assetHebrewDate(new Date(2014,4,12), 5774, HebrewMonth.IYAR, 12, 250)
 
@@ -113,3 +131,18 @@ yomKippurTest()
 sukkotTest()
 chanukkahTest()
 beginTalUmatarTest()
+
+notOmerTest(new Date(2015,3,3))
+omerEdgeTest(new Date(2015,3,4), 1, 'tonight')
+omerTest(new Date(2015,3,5), 1)
+omerTest(new Date(2015,3,6), 2)
+omerTest(new Date(2015,3,18), 14)
+omerTest(new Date(2015,3,19), 15)
+omerTest(new Date(2015,3,20), 16)
+omerTest(new Date(2015,4,17), 43)
+omerTest(new Date(2015,4,18), 44)
+omerTest(new Date(2015,4,19), 45)
+omerTest(new Date(2015,4,22), 48)
+omerEdgeTest(new Date(2015,4,23), 49, 'today')
+notOmerTest(new Date(2015,4,24))
+notOmerTest(new Date(2015,9,1))
