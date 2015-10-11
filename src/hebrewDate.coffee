@@ -36,7 +36,7 @@ class HebrewDate
   isErebYomTob: -> @monthAndRangeAre('NISAN', [14,20]) || @monthAndRangeAre('SIVAN', [5]) || @monthAndRangeAre('ELUL', [29]) || @monthAndRangeAre('TISHRI', [14,21])
   isYomTob: -> @monthAndRangeAre('NISAN', [15,16,21,22]) || @isShabuot() || @monthAndRangeAre('TISHRI', [1,2,15,16,22,23])
   isChanukkah: -> @monthAndRangeAre('KISLEV', [25..30]) || @monthAndRangeAre('TEVET', [1..(if @hebrewYear.getDaysInYear() % 10 > 3 then 2 else 3)])
-  isRoshHodesh: -> @dayOfMonth in [1,30] && @staticHebrewMonth isnt HebrewMonth.TISHRI
+  isRoshHodesh: -> (1 == @dayOfMonth && @staticHebrewMonth isnt HebrewMonth.TISHRI) || 30 == @dayOfMonth
   isBeginTalUmatar: -> @gregorianDate.getMonth() == 11 && @gregorianDate.getDate() == (parseInt((@gregorianDate.getFullYear())/ 100) - parseInt((@gregorianDate.getFullYear())/ 400) - 11 + parseInt((4 - (@gregorianDate.getFullYear() + 1) % 4) / 4))
   # TODO: Missing tests from here
   isMaharHodesh: -> 29 == @dayOfMonth && @isShabbat()
