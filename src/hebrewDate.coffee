@@ -112,5 +112,6 @@ HebrewDate.prototype.is17Tamuz = HebrewDate.prototype.is17Tammuz
 HebrewDate.prototype.is9Av = HebrewDate.prototype.is9Ab
 HebrewDate.prototype.isTzomGedalia = HebrewDate.prototype.isTzomGedaliah = HebrewDate.prototype.isFastOfGedalia = HebrewDate.prototype.isFastOfGedaliah
 HebrewDate.prototype.isTaanitEsther = HebrewDate.prototype.isTaanitEster
+HebrewDate.prototype.isEreb9Ab = HebrewDate.prototype.isEreb9Av
 
 (exports ? this).HebrewDate = HebrewDate
