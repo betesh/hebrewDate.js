@@ -4,7 +4,7 @@ class HachrazatRoshChodesh
   constructor: (hebrew_date) ->
     hebrewYear = hebrew_date.getHebrewYear()
     months = HebrewMonth.MONTHS.ofYear(hebrewYear)
-    monthIndex = months.indexOf(hebrew_date.staticHebrewMonth) + 1
+    monthIndex = (months.indexOf(hebrew_date.staticHebrewMonth) + 1) % months.length
     @name = months[monthIndex].name
     molad = hebrewYear.getThisRoshHashana().getMolad().advance(monthIndex)
     moladHours = molad.getHours() - 6

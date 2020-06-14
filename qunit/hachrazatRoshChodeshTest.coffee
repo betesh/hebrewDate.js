@@ -15,5 +15,6 @@ hachrazatRoshChodeshTest(new Date(2015,6,14), "אָב", "בְּיוֹם הַשּ
 hachrazatRoshChodeshTest(new Date(2015,7,14), "אֱלוּל", "בְּיוֹם שַּׁבָּת קֹדֶשׁ וּבְיוֹם רִאשׁוֹן", "will be on שַּׁבָּת at 4:23AM and 8 חָלָקִים")
 hachrazatRoshChodeshTest(new Date(2015,11,14), "שְׁבָט", "בְּיוֹם שֵׁנִי", "will be on מוֹצָאֵי שַּׁבָּת at 8:03PM and 13 חָלָקִים")
 hachrazatRoshChodeshTest(new Date(2016,4,1), "אִיָּר", "בְּיוֹם רִאשׁוֹן וּבְיוֹם שֵׁנִי", "was on לֵיל שַּׁבָּת at 10:59PM and 17 חָלָקִים")
+hachrazatRoshChodeshTest(new Date(2019,8,28), "תִּשְׁרִי", "בְּיוֹם שֵׁנִי", "will be on Monday at 8:17AM and 10 חָלָקִים")
 hachrazatRoshChodeshTest(new Date(2020,0,1), "שְׁבָט", "בְּיוֹם שֵׁנִי", "is [today] שַּׁבָּת at 8:46AM and 9 חָלָקִים")
 hachrazatRoshChodeshTest(new Date(2020,4,20), "סִיוָן", "בְּיוֹם רִאשׁוֹן", "was on Friday at 11:42AM and 13 חָלָקִים")
