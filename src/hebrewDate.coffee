@@ -66,6 +66,19 @@ class HebrewDate
   isErubTabshilin: -> @isErebYomTob() && @gregorianDate.getDay() in [3,4]
   isTaanit: -> @is9Ab() || @is17Tammuz() || @isFastOfGedaliah() || @isTaanitEster() || @is10Tevet()
   isHataratNedarim: -> @monthAndRangeAre('AB', [19,29]) || @monthAndRangeAre('ELUL', [29]) || @monthAndRangeAre('TISHRI', [9])
+  isErebPesach: -> @monthAndRangeAre('NISAN', [14])
+  is1stDayOfPesach: -> @monthAndRangeAre('NISAN', [15])
+  is2ndDayOfPesach: -> @monthAndRangeAre('NISAN', [16])
+  is8thDayOfPesach: -> @monthAndRangeAre('NISAN', [22])
+  isErebShabuot: -> @monthAndRangeAre('SIVAN', [5])
+  isErebRoshHashana: -> @monthAndRangeAre('ELUL', [29])
+  isErebSukkot: -> @monthAndRangeAre('TISHRI', [14])
+  isHoshanaRaba: -> @monthAndRangeAre('TISHRI', [21])
+  isSheminiAseret: -> @monthAndRangeAre('TISHRI', [22..23])
+  isBirkatHaIlanot: -> !@isShabbat() && @monthAndRangeAre('NISAN', if 0 == @gregorianDate.getDay() then [1..2] else [1])
+  isTefilatHaShelah: -> @monthAndRangeAre('IYAR', [29])
+  is2ndDayOfYomTob: -> @is2ndDayOfPesach() || @is8thDayOfPesach() || @monthAndRangeAre('SIVAN', [7]) || @monthAndRangeAre('TISHRI', [2,16,23])
+  isErebHoshanaRaba: -> @monthAndRangeAre('TISHRI', [20])
   # Till here
   weekOfYear: -> parseInt((@dayOfYear + 4 - @gregorianDate.getDay()) / 7) + 1
   occasions: -> result = []; (result.push(chag.replace(/^is/, '')) if chag.match(/^is/) && @[chag]() && !(@[chag] in (@["is#{alias}"] for alias in result))) for chag, val of @; result.sort()
