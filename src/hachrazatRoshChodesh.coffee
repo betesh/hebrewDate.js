@@ -24,9 +24,15 @@ class HachrazatRoshChodesh
     dayOfWeek1 = HEBREW_DAYS[dayOfWeek1Index]
     dayOfWeek30 = HEBREW_DAYS[(dayOfWeek1Index + 6) % 7]
     @fullDayOfWeekPhrase = "בְּיוֹם #{if is2Days then "#{dayOfWeek30} וּבְיוֹם " else ""}#{dayOfWeek1}"
+    moladIsWeekBeforeRoshHodesh = dayOfWeek1Index < molad.getDay() && dayOfWeek1Index >= (if is2Days then 1 else 0)
+    hachrazahIsSameDayAsMolad = "שַּׁבָּת" == @dayOfMolad && moladIsWeekBeforeRoshHodesh
+    @verb = switch
+      when hachrazahIsSameDayAsMolad then "is [today]"
+      when moladIsWeekBeforeRoshHodesh then "was on"
+      else "will be on"
   sephardicAnnouncement: -> "בְּסִימַן טוֹב יְהֵא לָנוּ רֹאשׁ חֹדֶשׁ #{@name} #{@fullDayOfWeekPhrase}"
   ashkenazicAnnouncement: -> "רֹאשׁ חֹדֶשׁ #{@name} יִהְיֶה #{@fullDayOfWeekPhrase} הַבָּא עָלֵינוּ וְעַל כָּל-יִשְׂרָאֵל לְטוֹבָה"
-  moladAnnouncement: -> "The מוֹלַד of חֹדֶשׁ #{@name} will be on #{@dayOfMolad} at #{@moladTime} and #{@moladHalakim} #{if 1 == @moladHalakim then "חֵלֶק" else "חָלָקִים"}"
+  moladAnnouncement: -> "The מוֹלַד of חֹדֶשׁ #{@name} #{@verb} #{@dayOfMolad} at #{@moladTime} and #{@moladHalakim} #{if 1 == @moladHalakim then "חֵלֶק" else "חָלָקִים"}"
 
 (exports ? this).HEBREW_DAYS = ['רִאשׁוֹן', 'שֵׁנִי', 'שְׁלִישִׁי', 'רְבִיעִי', 'חֲמִישִׁי', 'הַשִּׁשִּׁי', 'שַּׁבָּת קֹדֶשׁ']
 (exports ? this).HachrazatRoshChodesh = HachrazatRoshChodesh
