@@ -2,7 +2,7 @@ hebrew_year_of = (year) -> new RoshHashana(year).getHebrewYear()
 
 assertMonthNames = ->
   QUnit.test "Month names", (assert) ->
-    assert.deepEqual HebrewMonth.NAMES[0], "תִּשׁרִי"
+    assert.deepEqual HebrewMonth.NAMES[0], "תִּשְׁרִי"
     assert.deepEqual HebrewMonth.NAMES[11], "אֱלוּל"
     assert.deepEqual HebrewMonth.NAMES.length, 12
 
@@ -58,10 +58,10 @@ assertMonthNames()
 assertMonthsArray()
 assertMonthLengths()
 
-assertHebrewMonth(5773, 0, 30, "תִּשׁרִי", new Date(2012,8,17), new Date(2012,9,17))
+assertHebrewMonth(5773, 0, 30, "תִּשְׁרִי", new Date(2012,8,17), new Date(2012,9,17))
 assertHebrewMonth(5773, 1, 29, "מַרְחֶשְׁוָן", new Date(2012,9,17), new Date(2012,10,15))
 
-assertHebrewMonth(5774, 0, 30, "תִּשׁרִי", new Date(2013,8,5), new Date(2013,9,5))
+assertHebrewMonth(5774, 0, 30, "תִּשְׁרִי", new Date(2013,8,5), new Date(2013,9,5))
 assertHebrewMonth(5774, 1, 30, "מַרְחֶשְׁוָן", new Date(2013,9,5), new Date(2013,10,4))
 assertHebrewMonth(5774, 2, 30, "כִּסְלֵו", new Date(2013,10,4), new Date(2013,11,4))
 assertHebrewMonth(5774, 3, 29, "טֵבֵת", new Date(2013,11,4), new Date(2014,0,2))
@@ -75,7 +75,7 @@ assertHebrewMonth(5774, 10, 29, "תַּמּוּז", new Date(2014,5,29), new Dat
 assertHebrewMonth(5774, 11, 30, "אָב", new Date(2014,6,28), new Date(2014,7,27))
 assertHebrewMonth(5774, 12, 29, "אֱלוּל", new Date(2014,7,27), new Date(2014,8,25))
 
-assertHebrewMonth(5775, 0, 30, "תִּשׁרִי", new Date(2014,8,25), new Date(2014,9,25))
+assertHebrewMonth(5775, 0, 30, "תִּשְׁרִי", new Date(2014,8,25), new Date(2014,9,25))
 assertHebrewMonth(5775, 1, 29, "מַרְחֶשְׁוָן", new Date(2014,9,25), new Date(2014,10,23))
 assertHebrewMonth(5775, 2, 30, "כִּסְלֵו", new Date(2014,10,23), new Date(2014,11,23))
 assertHebrewMonth(5775, 3, 29, "טֵבֵת", new Date(2014,11,23), new Date(2015,0,21))

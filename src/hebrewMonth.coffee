@@ -17,7 +17,7 @@ class HebrewMonth
   getNextRoshHodesh: -> @gregorianDateOfNextRoshHodesh
 
 (->
-  @TISHRI = @TISHREI = { name: "תִּשׁרִי", length: (year) -> 30 }
+  @TISHRI = @TISHREI = { name: "תִּשְׁרִי", length: (year) -> 30 }
   @HESHVAN = @CHESHVAN = { name: "מַרְחֶשְׁוָן", length: (year) -> if year.getDaysInYear() % 10 > 4 then 30 else 29 }
   @KISLEV = { name: "כִּסְלֵו", length: (year) -> if year.getDaysInYear() % 10 > 3 then 30 else 29 }
   @TEBET = @TEVET = { name: "טֵבֵת", length: (year) -> 29}
