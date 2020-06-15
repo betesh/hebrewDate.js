@@ -344,7 +344,19 @@ assetSedraOfDate(new Date(2017, 8, 21), 1, 'הַאֲזִינוּ')
 assetSedraOfDate(new Date(2017, 8, 23), 1, 'הַאֲזִינוּ')
 
 # 5780 -- M5
+assetSedraOfDate(new Date(2020, 8, 18), 51, 'רֹאשׁ הַשָּׁנָה')
+
 # 5781 -- S5
+assetSedraOfDate(new Date(2020, 8, 19), 1, 'רֹאשׁ הַשָּׁנָה')
+assetSedraOfDate(new Date(2020, 8, 20), 2, 'הַאֲזִינוּ')
+assetSedraOfDate(new Date(2020, 8, 26), 2, 'הַאֲזִינוּ')
+assetSedraOfDate(new Date(2020, 8, 27), 3, 'חַג הַסֻּכּוֹת')
+assetSedraOfDate(new Date(2020, 9, 3), 3, 'חַג הַסֻּכּוֹת')
+assetSedraOfDate(new Date(2020, 9, 4), 4, 'שְּׁמִינִי עֲצֶרֶת')
+assetSedraOfDate(new Date(2020, 9, 10), 4, 'שְּׁמִינִי עֲצֶרֶת')
+assetSedraOfDate(new Date(2020, 9, 11), 5, 'בְּרֵאשִׁית')
+assetSedraOfDate(new Date(2020, 9, 17), 5, 'בְּרֵאשִׁית')
+
 # 5782 -- T1
 # 5784 -- S2
 # 5785 -- R5

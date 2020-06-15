@@ -80,7 +80,7 @@ class HebrewDate
   is2ndDayOfYomTob: -> @is2ndDayOfPesach() || @is8thDayOfPesach() || @monthAndRangeAre('SIVAN', [7]) || @monthAndRangeAre('TISHRI', [2,16,23])
   isErebHoshanaRaba: -> @monthAndRangeAre('TISHRI', [20])
   # Till here
-  weekOfYear: -> parseInt((@dayOfYear + 4 - @gregorianDate.getDay()) / 7) + 1
+  weekOfYear: -> parseInt((@dayOfYear + 11 - @gregorianDate.getDay()) / 7) + (if 6 == @hebrewYear.getThisRoshHashana().getGregorianDate().getDay() then 1 else 0)
   occasions: -> result = []; (result.push(chag.replace(/^is/, '')) if chag.match(/^is/) && @[chag]() && !(@[chag] in (@["is#{alias}"] for alias in result))) for chag, val of @; result.sort()
   sedra: -> @hebrewYear.sedrot().sedra(@)
   omer: -> @_omer ?= (switch @staticHebrewMonth

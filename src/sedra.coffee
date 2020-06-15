@@ -6,7 +6,7 @@ class Sedra
     @sedrot = (if isLeapYear then Sedra.SEDROT else Sedra.PESHUTA_SEDROT).slice(0)
     @sedrot.splice(@sedrot.indexOf('וַיַּקְהֵל'), 2, 'וַיַּקְהֵל-פְקוּדֵי') if !isLeapYear && (4 != yearBeginsOn || 2 != yearEndsOn)
     switch yearBeginsOn
-      when 6 then @sedrot.splice(0, 0, 'רֹאשׁ הַשָּׁנָה', 'הַאֲזִינוּ','חַג הַסֻּכּוֹת', 'שְּׁמִינִי עֲצֶרֶת')
+      when 6 then @sedrot.splice(0, 0, '', 'רֹאשׁ הַשָּׁנָה', 'הַאֲזִינוּ','חַג הַסֻּכּוֹת', 'שְּׁמִינִי עֲצֶרֶת')
       when 4 then @sedrot.splice(0, 0, '', 'הַאֲזִינוּ', 'יוֹם הַכִּפֻּרִים', 'חַג הַסֻּכּוֹת')
       else @sedrot.splice(0, 0, '', 'וַיֵּלֶךְ', 'הַאֲזִינוּ', 'חַג הַסֻּכּוֹת')
     switch yearEndsOn
