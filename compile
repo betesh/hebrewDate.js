@@ -9,6 +9,9 @@ fi
 if [ ! $(which coffee) ]; then
   npm install -g coffee-script
 fi
+if [ ! $(which haml-js) ]; then
+  npm install -g haml
+fi
 cat src/*.coffee | coffee --compile --stdio > compiled/hebrewDate.js
 cat qunit/*.coffee | coffee --compile --stdio > qunit/tests.js
-haml qunit/qunit.haml qunit/qunit.html
+haml-js qunit/qunit.haml qunit/qunit.html
