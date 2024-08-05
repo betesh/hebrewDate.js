@@ -7,11 +7,12 @@ assetSedraOfDate = (date, weekOfYear, sedra) ->
 # Still need to test:
 # M2, M5
 # T4, T1
-# R0, R2, R5
-# S0, S2, S3, S5
+# R2, R5
+# S0, S3, S5
 
 
 # 5774 -- R0
+assetSedraOfDate(new Date(2014, 6, 20), 47, 'מַסְעֵי')
 assetSedraOfDate(new Date(2014, 8, 14), 55, 'נִצָּבִים-וַיֵּלֶךְ')
 assetSedraOfDate(new Date(2014, 8, 20), 55, 'נִצָּבִים-וַיֵּלֶךְ')
 assetSedraOfDate(new Date(2014, 8, 21), 56, 'הַאֲזִינוּ')
@@ -359,6 +360,8 @@ assetSedraOfDate(new Date(2020, 9, 17), 5, 'בְּרֵאשִׁית')
 
 # 5782 -- T1
 # 5784 -- S2
+assetSedraOfDate(new Date(2024, 7, 3), 47, 'מַּטּוֹת-מַסְעֵי')
+
 # 5785 -- R5
 # 5786 -- T4
 

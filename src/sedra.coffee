@@ -20,7 +20,7 @@ class Sedra
         @sedrot.splice(@sedrot.length - 2, 2)
       when 1
         @sedrot.splice(@sedrot.length - 2, 2)
-    @sedrot.splice(@sedrot.indexOf('מַּטּוֹת'), 2, 'מַּטּוֹת-מַסְעֵי') if 4 != yearEndsOn || !isLeapYear
+    @sedrot.splice(@sedrot.indexOf('מַּטּוֹת'), 2, 'מַּטּוֹת-מַסְעֵי') if !isLeapYear || !(yearBeginsOn == 4 && yearEndsOn == 4)
     @sedrot.splice(@sedrot.length - 23, 0, 'חַג הַפֶּסַח')
     @sedrot.splice(@sedrot.length - 23, 0, 'אַחֲרוֹן שֶׁל פֶּסַח') if 1 == yearEndsOn
   sedra: (hebrewDate) -> @sedrot[hebrewDate.weekOfYear()]
